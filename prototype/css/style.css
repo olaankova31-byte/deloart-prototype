@@ -1,0 +1,1015 @@
+/* ==========================================================================
+   DeloART — редизайн главной по ТЗ клиента, дизайн-система brand/bot:
+   red #C81C38 · black #202020 · light #F7F7F7 · border #DADADA / #E5E7EB
+   Шрифты: Inter (основной), Golos Text (второстепенный)
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Regular.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Medium.woff2') format('woff2');
+    font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-SemiBold.woff2') format('woff2');
+    font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Bold.woff2') format('woff2');
+    font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Golos Text';
+    src: url('../fonts/GolosText-Regular.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Golos Text';
+    src: url('../fonts/GolosText-Medium.woff2') format('woff2');
+    font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Golos Text';
+    src: url('../fonts/GolosText-DemiBold.woff2') format('woff2');
+    font-weight: 600; font-style: normal; font-display: swap;
+}
+
+:root {
+    --black: #202020;
+    --gray: #666;
+    --red: #C81C38;
+    --red-dark: #A8162C;
+    --white: #fff;
+    --light: #f7f7f7;
+    --bento: #f5f7fa;
+    --line: #e5e7eb;
+    --border: #dadada;
+    --ink: #0f172a;
+    --ink-soft: #cbd5e1;
+    --ink-line: #1e293b;
+    --font-family: 'Inter', sans-serif;
+    --second-family: 'Golos Text', sans-serif;
+    --radius-lg: 3.3rem;
+    --radius-md: 2rem;
+    --radius-btn: 2.6rem;
+    --shadow: 0 4px 44px 0 rgba(0, 0, 0, .1);
+    --shadow-soft: 0 9px 9px 0 rgba(0, 0, 0, .09);
+    --ease: .3s;
+}
+
+* { box-sizing: border-box; }
+
+html {
+    font-size: calc(100vw / 192);
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--black);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, p, ul, a, button, figure, blockquote {
+    margin: 0; padding: 0; text-decoration: none; list-style: none; border: none; background: transparent;
+}
+button { cursor: pointer; font-family: inherit; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 150rem;
+    padding: 0 2rem;
+}
+
+.red { color: var(--red); }
+
+/* ============================ BUTTONS ============================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.6rem;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 143%;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: var(--radius-btn);
+    border: 1px solid transparent;
+    transition: background-color var(--ease), color var(--ease), border-color var(--ease);
+}
+.btn-red { color: #fff; background: var(--red); border-color: var(--red); }
+.btn-red:hover { color: var(--red); background-color: transparent; }
+.btn-ghost { color: var(--black); border-color: var(--border); background: #fff; }
+.btn-ghost:hover { color: var(--red); border-color: var(--red); }
+.btn-lg { padding: 1.4rem 3.2rem; font-size: 1.6rem; line-height: 120%; }
+.btn-sm { padding: .8rem 2rem; font-size: 1.3rem; }
+
+/* ============================ LABELS / TITLES ============================ */
+.page-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+    padding: .3rem 2rem;
+    width: max-content;
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 154%;
+    color: var(--red);
+    border: 1px solid var(--border);
+    border-radius: 7.2rem;
+    box-shadow: var(--shadow-soft);
+    background: #fff;
+}
+.section-head { margin-bottom: 0; max-width: 90rem; }
+/* РИТМ подложек как на референсах: серая скруглённая панель через одну секцию.
+   Серые панели: решения, процесс, стек. Белый фон (воздух): кейсы, фото-перебивки, отрасли, руководитель. */
+section.solutions, section.cases, section.process,
+section.industries, section.stack, section.leader { padding-top: 0; padding-bottom: 2.5rem; background: #fff; }
+.solutions .container, .process .container, .stack .container {
+    background: var(--light);
+    border-radius: var(--radius-md);
+    width: calc(100% - 4rem);
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+.cases .section-head, .stack .section-head, .industries .section-head { margin-left: auto; margin-right: auto; text-align: center; }
+.cases .section-head .page-label, .stack .section-head .page-label, .industries .section-head .page-label { margin-left: auto; margin-right: auto; }
+.cases .section-head .section-desc, .stack .section-head .section-desc { margin-left: auto; margin-right: auto; }
+.page-title {
+    margin-bottom: 5rem;
+    font-weight: 500;
+    font-size: 5rem;
+    line-height: 100%;
+    letter-spacing: -0.02em;
+    color: #000;
+}
+.section-desc {
+    margin-top: 1.8rem;
+    margin-bottom: 5rem;
+    max-width: 72.8rem;
+    font-family: var(--second-family);
+    font-size: 1.7rem;
+    line-height: 140%;
+    color: rgba(0, 0, 0, .7);
+}
+.section-head .page-title:last-child { margin-bottom: 5rem; }
+.section-head .section-desc:last-child { margin-bottom: 5rem; }
+.section-cta { display: flex; justify-content: center; margin-top: 4rem; }
+.hero-link {
+    display: inline-flex; align-items: center; gap: .8rem;
+    font-weight: 500; font-size: 1.5rem; color: var(--black);
+    transition: color var(--ease);
+}
+.hero-link:hover { color: var(--red); }
+.hero-link svg { flex-shrink: 0; }
+
+/* ============================ HEADER (sticky + blur) ============================ */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(255, 255, 255, .88);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+}
+.header-inner {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
+}
+.logo { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+.logo img { width: 12rem; height: auto; }
+.logo-descr {
+    font-family: var(--second-family);
+    font-size: 1.2rem;
+    line-height: 120%;
+    color: var(--gray);
+    max-width: 12rem;
+}
+.nav { flex: 1; }
+.nav-list {
+    display: flex; align-items: center; justify-content: center;
+    gap: .2rem; flex-wrap: nowrap;
+}
+.nav-link {
+    display: inline-flex; align-items: center; gap: .6rem;
+    padding: .8rem 1.1rem;
+    font-weight: 500; font-size: 1.4rem; line-height: 120%;
+    white-space: nowrap;
+    color: var(--black);
+    transition: color var(--ease);
+}
+.nav-link:hover { color: var(--red); }
+.nav-cta-mobile { display: none; }
+.header-actions { display: flex; align-items: center; gap: 1.2rem; flex-shrink: 0; }
+.header-phone { font-weight: 600; font-size: 1.5rem; white-space: nowrap; transition: color var(--ease); }
+.header-phone:hover { color: var(--red); }
+.tg-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 4rem; height: 4rem;
+    color: var(--black);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    transition: color var(--ease), border-color var(--ease);
+}
+.tg-btn svg { fill: currentColor; }
+.tg-btn:hover { color: var(--red); border-color: var(--red); }
+.header-call-mobile {
+    display: none;
+    align-items: center; justify-content: center;
+    width: 4rem; height: 4rem;
+    color: var(--black);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+}
+.burger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: .5rem;
+    width: 4rem; height: 4rem;
+}
+.burger span { display: block; width: 2.2rem; height: 2px; margin: 0 auto; background: var(--black); transition: transform var(--ease), opacity var(--ease); }
+.burger.active span:nth-child(1) { transform: translateY(.7rem) rotate(45deg); }
+.burger.active span:nth-child(2) { opacity: 0; }
+.burger.active span:nth-child(3) { transform: translateY(-.7rem) rotate(-45deg); }
+
+/* ============================ ЭКРАН 1. HERO + BENTO ============================ */
+.hero { padding: 6rem 0 7rem; }
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+}
+.hero-left { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.hero-label { margin-bottom: 3rem; }
+.hero-title {
+    margin-bottom: 5rem;
+    max-width: 100rem;
+    font-weight: 500;
+    font-size: 5rem;
+    line-height: 100%;
+    letter-spacing: -0.02em;
+}
+.hero-title span { color: var(--red); }
+.hero-desc {
+    margin-bottom: 3.2rem;
+    max-width: 72.8rem;
+    font-family: var(--second-family);
+    font-size: 1.8rem;
+    line-height: 120%;
+    color: rgba(0, 0, 0, .7);
+}
+.hero-control { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+
+.hero-bento {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 1.6rem;
+    padding: 2rem;
+    background: var(--bento);
+    border-radius: var(--radius-md);
+}
+.bento-card {
+    padding: 2.6rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1.6rem;
+}
+.bento-card--main { grid-column: span 2; background: var(--black); border-color: var(--black); color: #fff; }
+.bento-number {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 5rem;
+    line-height: 100%;
+    letter-spacing: -0.03em;
+    color: var(--red);
+}
+.bento-caption {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: 120%;
+}
+.bento-text {
+    font-family: var(--second-family);
+    font-size: 1.5rem;
+    line-height: 135%;
+    color: rgba(0, 0, 0, .7);
+}
+.bento-card--main .bento-text { color: rgba(255, 255, 255, .75); }
+
+/* ============================ ЭКРАН 2. РЕШЕНИЯ ============================ */
+.solutions { padding: 3rem 0 8rem; }
+.solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 1.3rem; }
+.solution-card {
+    display: flex; flex-direction: column;
+    padding: 3.5rem 2rem 5rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    transition: box-shadow var(--ease), transform var(--ease);
+}
+.solution-card:hover { box-shadow: var(--shadow); transform: translateY(-.4rem); }
+.solution-name { margin-bottom: 1.8rem; font-weight: 500; font-size: 2.6rem; line-height: 120%; }
+.solution-who, .solution-what {
+    margin-bottom: 1.4rem;
+    font-family: var(--second-family);
+    font-size: 1.5rem; line-height: 140%;
+    color: rgba(0, 0, 0, .7);
+}
+.solution-who b, .solution-what b { color: var(--black); font-weight: 600; }
+.solution-foot {
+    margin-top: auto;
+    padding-top: 2.4rem;
+    display: flex; flex-direction: column; gap: 1.4rem; align-items: stretch;
+}
+.solution-term {
+    font-family: var(--second-family);
+    font-size: 1.4rem; font-weight: 600; color: var(--red);
+}
+.solution-foot .btn { width: 100%; }
+
+/* ============================ ЭКРАН 3. КЕЙСЫ ============================ */
+.cases { padding: 0 0 8rem; }
+.cases-tabs {
+    display: flex; gap: 1rem; justify-content: center;
+    margin-bottom: 3.6rem;
+    overflow-x: auto;
+    padding-bottom: .6rem;
+}
+.case-tab {
+    flex-shrink: 0;
+    padding: 1rem 2.2rem;
+    font-weight: 500; font-size: 1.4rem;
+    color: var(--black);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 7.2rem;
+    transition: all var(--ease);
+}
+.case-tab:hover { border-color: var(--red); color: var(--red); }
+.case-tab.active { color: #fff; background: var(--red); border-color: var(--red); }
+.cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem 1.3rem; }
+.case-card {
+    display: flex; flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: box-shadow var(--ease), transform var(--ease), opacity var(--ease);
+}
+.case-card:hover { box-shadow: var(--shadow); transform: translateY(-.4rem); }
+.case-card.hidden { display: none; }
+.case-image img { width: 100%; height: 24rem; object-fit: cover; }
+.case-body { display: flex; flex-direction: column; gap: 1.4rem; padding: 2.6rem; }
+.case-badge {
+    align-self: flex-start;
+    padding: .5rem 1.4rem;
+    font-weight: 500; font-size: 1.25rem;
+    color: var(--red);
+    border: 1px solid var(--border);
+    border-radius: 7.2rem;
+    background: #fff;
+    box-shadow: var(--shadow-soft);
+}
+.case-name { font-weight: 600; font-size: 2rem; line-height: 120%; }
+.case-metrics { display: flex; flex-direction: column; gap: .8rem; }
+.case-metric {
+    padding: 1rem 1.4rem;
+    font-family: var(--second-family);
+    font-size: 1.4rem; line-height: 135%;
+    background: var(--bento);
+    border-radius: 1rem;
+}
+.case-metric-label { font-weight: 600; color: var(--black); }
+.case-metric--after { background: var(--black); color: #fff; }
+.case-metric--after .case-metric-label { color: var(--red); }
+
+/* ============================ ЭКРАН 4. ПРОЦЕСС ============================ */
+.process { padding: 7rem 0; background: var(--bento); }
+.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
+.step-card {
+    display: flex; flex-direction: column;
+    padding: 3rem 2.6rem;
+    background: #fff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+}
+.step-number {
+    margin-bottom: 1.6rem;
+    font-weight: 700;
+    font-size: 4.6rem;
+    line-height: 100%;
+    letter-spacing: -0.03em;
+    color: var(--red);
+}
+.step-name { margin-bottom: 1.2rem; font-weight: 600; font-size: 2rem; line-height: 118%; }
+.step-text {
+    margin-bottom: 2rem;
+    font-family: var(--second-family);
+    font-size: 1.45rem; line-height: 140%;
+    color: rgba(0, 0, 0, .7);
+}
+.step-result {
+    margin-top: auto;
+    padding: 1.4rem;
+    font-family: var(--second-family);
+    font-size: 1.35rem; line-height: 135%;
+    background: var(--bento);
+    border-radius: 1rem;
+}
+.step-result span {
+    display: block;
+    margin-bottom: .4rem;
+    font-family: var(--font-family);
+    font-size: 1.2rem; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--red);
+}
+.process-cta {
+    display: flex; align-items: center; gap: 3rem; justify-content: space-between;
+    margin-top: 1.6rem;
+    padding: 3rem 3.4rem;
+    max-width: 132rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1.6rem;
+}
+.process-cta-text {
+    max-width: 80rem;
+    font-family: var(--second-family);
+    font-size: 1.6rem; line-height: 140%;
+}
+.process-cta .btn { flex-shrink: 0; }
+
+/* ============================ ЭКРАН 5. ОТРАСЛИ ============================ */
+.industries { padding: 8rem 0; }
+.industry-tabs {
+    display: flex; gap: 1rem;
+    margin-bottom: 2.4rem;
+    overflow-x: auto;
+    padding-bottom: .6rem;
+}
+.industry-tab {
+    flex-shrink: 0;
+    padding: 1.1rem 2.4rem;
+    font-weight: 500; font-size: 1.45rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 7.2rem;
+    transition: all var(--ease);
+}
+.industry-tab:hover { border-color: var(--red); color: var(--red); }
+.industry-tab.active { color: #fff; background: var(--black); border-color: var(--black); }
+.industry-panel {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+}
+.industry-panel.active { display: grid; }
+.industry-left {
+    padding: 4rem;
+    background: var(--light);
+    border-radius: var(--radius-md);
+}
+.industry-name { margin-bottom: 1.6rem; font-weight: 600; font-size: 3rem; line-height: 110%; }
+.industry-text {
+    margin-bottom: 2rem;
+    font-family: var(--second-family);
+    font-size: 1.6rem; line-height: 145%;
+    color: rgba(0, 0, 0, .7);
+}
+.industry-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.4rem; }
+.industry-list li {
+    position: relative;
+    padding-left: 2.4rem;
+    font-family: var(--second-family);
+    font-size: 1.5rem; line-height: 135%;
+}
+.industry-list li::before {
+    content: '';
+    position: absolute; left: 0; top: .6rem;
+    width: .9rem; height: .9rem;
+    background: var(--red);
+    border-radius: 50%;
+}
+.industry-right {
+    display: flex; align-items: center; justify-content: center;
+    padding: 4rem;
+    background: var(--black);
+    border-radius: var(--radius-md);
+}
+/* Стилизованная UI-схема вместо стоковых фото */
+.ui-mock {
+    width: 100%; max-width: 42rem;
+    padding: 2.2rem;
+    background: #fff;
+    border-radius: 1.6rem;
+}
+.ui-mock-bar { display: flex; gap: .7rem; margin-bottom: 1.8rem; }
+.ui-mock-bar span { width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--line); }
+.ui-mock-bar span:first-child { background: var(--red); }
+.ui-mock-title { margin-bottom: 1.4rem; font-weight: 600; font-size: 1.8rem; }
+.ui-mock-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.ui-mock-row i { display: block; height: 5.4rem; background: var(--bento); border: 1px solid var(--line); border-radius: 1rem; }
+.ui-mock-doctors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.4rem; }
+.ui-mock-doctors b {
+    display: block; padding: 1.2rem .8rem;
+    font-weight: 500; font-size: 1.2rem; text-align: center;
+    background: var(--bento); border: 1px solid var(--line); border-radius: 1rem;
+}
+.ui-mock-table { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.ui-mock-table i { display: block; height: 4.4rem; background: var(--bento); border: 1px solid var(--line); border-radius: 1rem; }
+.ui-mock-calc { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.4rem; }
+.ui-mock-calc b { display: block; height: 5rem; background: var(--bento); border: 1px solid var(--line); border-radius: 1rem; }
+.ui-mock-btn {
+    padding: 1.2rem;
+    font-weight: 600; font-size: 1.4rem; text-align: center; color: #fff;
+    background: var(--red);
+    border-radius: 2.6rem;
+}
+
+/* ============================ ЭКРАН 6. СТЕК ============================ */
+.stack { padding: 0 0 8rem; }
+.stack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
+.stack-card {
+    padding: 3.4rem 3.2rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+}
+.stack-name { margin-bottom: 1.4rem; font-weight: 600; font-size: 2.4rem; line-height: 115%; }
+.stack-text {
+    margin-bottom: 2rem;
+    font-family: var(--second-family);
+    font-size: 1.55rem; line-height: 140%;
+    color: rgba(0, 0, 0, .7);
+}
+.stack-badge {
+    display: inline-block;
+    padding: .7rem 1.6rem;
+    font-weight: 500; font-size: 1.35rem; color: var(--red);
+    border: 1px solid var(--border);
+    border-radius: 7.2rem;
+    box-shadow: var(--shadow-soft);
+}
+.stack-badge--ghost { color: var(--gray); box-shadow: none; }
+.pagespeed {
+    display: inline-flex; align-items: center; gap: 1.2rem;
+    padding: 1rem 1.8rem;
+    background: var(--bento);
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+}
+.pagespeed-score { font-weight: 700; font-size: 2rem; color: #16a34a; }
+.pagespeed-label { font-family: var(--second-family); font-size: 1.4rem; color: rgba(0, 0, 0, .7); }
+.stack-scheme {
+    display: inline-flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    padding: 1rem 1.8rem;
+    background: var(--black);
+    border-radius: 1.2rem;
+    font-weight: 500; font-size: 1.4rem; color: #fff;
+}
+.stack-scheme i { color: var(--red); font-style: normal; font-weight: 700; }
+
+/* ============================ ЭКРАН 7. РУКОВОДИТЕЛЬ + ОТЗЫВЫ ============================ */
+.leader { padding: 0 0 8rem; }
+.leader-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-items: stretch; }
+.leader-card {
+    padding: 4rem;
+    background: var(--light);
+    border-radius: var(--radius-md);
+}
+.leader-photo {
+    display: flex; align-items: center; justify-content: center;
+    width: 12rem; height: 12rem;
+    margin-bottom: 2.4rem;
+    font-weight: 700; font-size: 3.4rem; color: #fff;
+    background: var(--black);
+    border-radius: 1.6rem;
+}
+.leader-quote {
+    margin-bottom: 2.4rem;
+    font-size: 1.8rem; line-height: 145%;
+    quotes: none;
+}
+.leader-sign b { display: block; font-size: 1.8rem; }
+.leader-sign span { font-family: var(--second-family); font-size: 1.4rem; color: var(--gray); }
+.reviews-card {
+    position: relative;
+    display: flex; flex-direction: column;
+    padding: 4rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+}
+.reviews-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.4rem; }
+.reviews-title { font-weight: 600; font-size: 2.6rem; }
+.reviews-nav { display: flex; gap: 1rem; }
+.reviews-arrow {
+    display: flex; align-items: center; justify-content: center;
+    width: 4.4rem; height: 4.4rem;
+    font-size: 1.8rem;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    transition: all var(--ease);
+}
+.reviews-arrow:hover { color: var(--red); border-color: var(--red); }
+.reviews-track { position: relative; }
+.review { display: none; flex-direction: column; gap: 1.4rem; align-items: flex-start; }
+.review.active { display: flex; }
+.review-logo {
+    padding: 1rem 2rem;
+    font-weight: 700; font-size: 1.2rem; letter-spacing: .08em;
+    color: var(--gray);
+    background: var(--bento);
+    border: 1px dashed var(--border);
+    border-radius: 1rem;
+}
+.review-text { font-size: 1.7rem; line-height: 145%; }
+.review-author b { display: block; font-size: 1.6rem; }
+.review-author span { font-family: var(--second-family); font-size: 1.4rem; color: var(--gray); }
+.review-site { font-weight: 500; font-size: 1.4rem; color: var(--red); }
+.reviews-dots { display: flex; gap: .8rem; margin-top: 2.4rem; }
+.reviews-dots i { width: 3rem; height: .4rem; border-radius: 1rem; background: var(--line); cursor: pointer; transition: background var(--ease); }
+.reviews-dots i.active { background: var(--red); }
+
+/* ============================ ФОТО-ПЕРЕБИВКИ (воздух) ============================ */
+.photo-break { padding: 0 0 2.5rem; background: #fff; }
+.photo-break .container { width: calc(100% - 4rem); }
+.photo-banner {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    margin: 0;
+    min-height: 54rem;
+    overflow: hidden;
+    border-radius: 3.2rem;
+    background: var(--bento);
+}
+.photo-banner > img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+.photo-banner::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, .38) 100%);
+    pointer-events: none;
+}
+.photo-plaque {
+    position: relative; z-index: 2;
+    margin: 3rem;
+    max-width: 64rem;
+    padding: 3rem 3.2rem 2.8rem;
+    color: #fff;
+    background: rgba(32, 20, 23, .74);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-radius: 2rem;
+}
+.photo-plaque-title {
+    margin-bottom: 1.4rem;
+    font-weight: 600;
+    font-size: 3rem;
+    line-height: 112%;
+    letter-spacing: -0.01em;
+}
+.photo-plaque-text {
+    margin-bottom: 2rem;
+    font-family: var(--second-family);
+    font-size: 1.6rem;
+    line-height: 145%;
+    color: rgba(255, 255, 255, .82);
+}
+.photo-plaque-link {
+    display: inline-flex; align-items: center; gap: .8rem;
+    font-weight: 600; font-size: 1.5rem;
+    color: #fff;
+    transition: color var(--ease);
+}
+.photo-plaque-link:hover { color: var(--red); }
+.photo-plaque-link svg { flex-shrink: 0; }
+
+/* ============================ ЭКРАН 8. ФИНАЛЬНАЯ CTA-ПЛАШКА + СВЕТЛЫЙ ПОДВАЛ ============================ */
+.final { padding: 0 0 2.5rem; background: #fff; }
+.final .container { width: calc(100% - 4rem); }
+.audit-box {
+    position: relative;
+    overflow: hidden;
+    padding: 7rem 6rem;
+    text-align: center;
+    background:
+        radial-gradient(120% 160% at 88% 20%, rgba(200, 28, 56, .55) 0%, rgba(200, 28, 56, 0) 55%),
+        linear-gradient(100deg, #0b0b0e 30%, #2b0e14 65%, #5c1220 100%);
+    border-radius: 3.2rem;
+}
+/* красная светящаяся сфера справа, как на референсе */
+.audit-box::after {
+    content: '';
+    position: absolute;
+    right: 6rem; top: 50%;
+    width: 3.4rem; height: 3.4rem;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ff7a8a, var(--red) 55%, #5c0a16 100%);
+    box-shadow: 0 0 3rem .6rem rgba(200, 28, 56, .55);
+    pointer-events: none;
+}
+.audit-title {
+    margin: 0 auto 2.4rem;
+    max-width: 90rem;
+    font-weight: 600;
+    font-size: 4.6rem; line-height: 108%;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+.audit-text {
+    margin: 0 auto 3.2rem;
+    max-width: 70rem;
+    font-family: var(--second-family);
+    font-size: 1.7rem; line-height: 140%;
+    color: var(--ink-soft);
+}
+.audit-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1.2rem;
+    align-items: center;
+    max-width: 92rem;
+    margin: 0 auto;
+    text-align: left;
+}
+.field-input {
+    padding: 1.4rem 1.8rem;
+    width: 100%;
+    font-family: var(--font-family);
+    font-size: 1.5rem;
+    color: #fff;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 1.2rem;
+    transition: border-color var(--ease), background-color var(--ease);
+}
+.field-input::placeholder { color: rgba(255, 255, 255, .35); }
+.field-input:focus { outline: none; border-color: var(--red); background: rgba(255, 255, 255, .1); }
+.form-note {
+    margin: 1.4rem auto 0;
+    max-width: 92rem;
+    font-family: var(--second-family);
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, .4);
+}
+
+/* Светлый подвал как на референсах */
+.footer { padding: 0 0 2.5rem; background: #fff; }
+.footer .container { width: calc(100% - 4rem); }
+.footer-inner {
+    display: grid;
+    background: var(--light);
+    border-radius: var(--radius-md);
+    padding: 4.2rem 4rem 1.5rem;
+    margin-bottom: 1.5rem;
+    grid-template-columns: 1.4fr 1.2fr 1fr 1fr auto;
+    gap: 2rem;
+    align-items: center;
+}
+.footer-logo { width: 13rem; margin-bottom: 1.8rem; filter: none; }
+.footer-descr {
+    margin: 0 0 2rem;
+    font-family: var(--second-family);
+    font-size: 1.4rem; line-height: 135%;
+    color: var(--gray);
+}
+.footer-req, .footer .footer-link {
+    display: block;
+    margin-bottom: 1.1rem;
+    font-family: var(--second-family);
+    font-size: 1.4rem; line-height: 135%;
+    color: var(--black);
+}
+.footer .footer-link:hover { color: var(--red); }
+.footer-title { margin-bottom: 1.6rem; font-weight: 600; font-size: 1.7rem; color: var(--black); }
+.footer-phone { font-family: var(--font-family); font-weight: 600; font-size: 1.7rem; color: var(--black); }
+.footer-socials { display: flex; gap: 1rem; }
+.footer-socials a {
+    display: flex; align-items: center; justify-content: center;
+    width: 4.4rem; height: 4.4rem;
+    font-weight: 700; font-size: 1.2rem; color: var(--black);
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 50%;
+    transition: border-color var(--ease), color var(--ease);
+}
+.footer-socials a:hover { border-color: var(--red); color: var(--red); }
+.footer-bottom {
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    margin-top: 8rem;
+    padding-top: 2.6rem;
+    border-top: .1rem solid #c7c7c7;
+    font-family: var(--second-family);
+    font-size: 1.3rem;
+    color: var(--gray);
+}
+
+/* ============================ MODAL ============================ */
+.modal {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    opacity: 0; visibility: hidden;
+    transition: opacity var(--ease), visibility var(--ease);
+}
+.modal.open { opacity: 1; visibility: visible; }
+.modal-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, .6); backdrop-filter: blur(6px); }
+.modal-box {
+    position: relative; z-index: 2;
+    width: 100%; max-width: 52rem;
+    padding: 4rem;
+    background: #fff;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2rem 6rem rgba(0, 0, 0, .3);
+    transform: translateY(2rem) scale(.97);
+    transition: transform var(--ease);
+}
+.modal.open .modal-box { transform: translateY(0) scale(1); }
+.modal-close {
+    position: absolute; top: 2rem; right: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    width: 3.6rem; height: 3.6rem;
+    border-radius: 50%;
+    transition: color var(--ease), background-color var(--ease);
+}
+.modal-close:hover { color: var(--red); background: var(--light); }
+.modal-title { margin-bottom: 1.2rem; font-weight: 600; font-size: 3.2rem; line-height: 105%; }
+.modal-desc { margin-bottom: 2.6rem; font-family: var(--second-family); font-size: 1.5rem; line-height: 140%; color: rgba(0, 0, 0, .65); }
+.modal-form { display: flex; flex-direction: column; gap: 1.4rem; }
+.modal-form .field-input { color: var(--black); background: var(--light); border-color: var(--border); }
+.modal-form .field-input::placeholder { color: rgba(0, 0, 0, .35); }
+.modal-form .field-input:focus { background: #fff; border-color: var(--red); }
+
+/* ============================ RESPONSIVE (лестница как у brand.deloart.ru) ============================ */
+@media (max-width: 1600px) {
+    html { font-size: calc(100vw / 160); }
+}
+@media (max-width: 1400px) {
+    html { font-size: calc(100vw / 140); }
+}
+@media (max-width: 1200px) {
+    html { font-size: calc(100vw / 120); }
+    .nav {
+        display: none;
+        position: absolute; top: 100%; left: 0; right: 0;
+        padding: 1.4rem 2rem 2.4rem;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        max-height: calc(100vh - 7rem);
+        overflow-y: auto;
+    }
+    .nav.open { display: block; }
+    .site-header { position: sticky; }
+    .header-inner { position: relative; }
+    .nav-list { flex-direction: column; align-items: stretch; gap: 0; margin-bottom: 1.6rem; }
+    .nav-link { width: 100%; padding: 1.3rem .6rem; font-size: 1.8rem; border-bottom: 1px solid var(--line); }
+    .nav-cta-mobile { display: flex; flex-direction: column; gap: 1.2rem; padding-top: 1rem; }
+    .nav-cta-mobile .consult-phone { font-size: 2.2rem; color: var(--black); }
+    .nav-cta-btn { width: 100%; }
+    .burger { display: flex; }
+    .header-actions .btn { display: none; }
+    .header-phone { display: none; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .solutions-grid { grid-template-columns: 1fr; }
+    .cases-grid { grid-template-columns: 1fr 1fr; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .industry-panel.active { grid-template-columns: 1fr; }
+    .leader-grid { grid-template-columns: 1fr; }
+    .stack-grid { grid-template-columns: 1fr; }
+    .process-cta { flex-direction: column; align-items: stretch; }
+    .audit-form { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 1024px) {
+    html { font-size: calc(100vw / 102.4); }
+    .page-title { font-size: 4rem; }
+    .hero-title { max-width: 62rem; }
+    .hero-desc { max-width: 48.8rem; }
+}
+@media (max-width: 992px) {
+    html { font-size: calc(100vw / 99.2); }
+}
+@media (max-width: 850px) {
+    html { font-size: calc(100vw / 85); }
+}
+@media (max-width: 768px) {
+    html { font-size: calc(100vw / 76.8); }
+    .page-title { font-size: 3.4rem; }
+    .hero-title { max-width: 50rem; font-size: 4rem; }
+    .cases-grid { grid-template-columns: 1fr; }
+    .solutions .container, .process .container, .stack .container {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .final .container, .footer .container { width: calc(100% - 2rem); }
+    .audit-box { padding: 4rem 2.4rem; border-radius: 2rem; }
+    .audit-box::after { display: none; }
+    .footer-inner { grid-template-columns: 1fr; padding: 3rem 2rem 2.4rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: .6rem; }
+    .audit-title { font-size: 3rem; }
+    .photo-break .container { width: calc(100% - 2rem); }
+    .photo-banner { min-height: 48rem; border-radius: 2rem; }
+    .photo-plaque { margin: 1.6rem; padding: 2.2rem 2rem; }
+    .photo-plaque-title { font-size: 2.2rem; }
+    .photo-plaque-text { font-size: 1.45rem; }
+    .industry-left, .industry-right { padding: 2.6rem 2rem; }
+    .leader-card, .reviews-card { padding: 2.6rem 2rem; }
+}
+@media (max-width: 650px) {
+    html { font-size: calc(100vw / 65); }
+}
+@media (max-width: 650px) {
+    .hero-title { max-width: 39rem; }
+}
+@media (max-width: 600px) {
+    html { font-size: calc(100vw / 60); }
+    .logo-descr { display: none; }
+    .tg-btn { display: none; }
+    .header-call-mobile { display: flex; }
+    .hero { padding: 4rem 0 5rem; }
+    .hero-title { font-size: 3rem; }
+    .hero-desc { max-width: 33.8rem; font-size: 1.6rem; }
+    .hero-control { flex-direction: column; align-items: stretch; }
+    .hero-control .btn { width: 100%; }
+    .hero-bento { grid-template-columns: 1fr; grid-template-rows: none; }
+    .bento-card--main { grid-column: span 1; }
+    .page-title { font-size: 2.6rem; }
+    .process { padding: 5rem 0; }
+    .process-grid { grid-template-columns: 1fr; }
+    .process-cta { padding: 2.4rem 2rem; }
+    .audit-form .btn { width: 100%; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .modal-box { padding: 3rem 2rem; }
+}
+@media (max-width: 576px) {
+    html { font-size: calc(100vw / 57.6); }
+    .container {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        width: calc(100% - 2rem);
+        padding: 0 1rem;
+    }
+    .solutions .container, .process .container, .stack .container {
+        padding-top: 3.7rem;
+        padding-bottom: 3.8rem;
+    }
+}
+@media (max-width: 480px) {
+    html { font-size: calc(100vw / 48); }
+}
+@media (max-width: 400px) {
+    html { font-size: calc(100vw / 40); }
+}
+@media (max-width: 360px) {
+    html { font-size: calc(100vw / 36); }
+}
+
+/* ============================ ANIMATION ============================ */
+.reveal { opacity: 0; transform: translateY(3rem); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
