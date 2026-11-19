@@ -146,11 +146,8 @@ section.industries, section.stack, section.leader { padding-top: 0; padding-bott
 .solutions .container, .process .container, .stack .container {
     background: var(--light);
     border-radius: var(--radius-md);
-    width: calc(100% - 4rem);
-    padding-top: 7rem;
-    padding-bottom: 7rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
+    width: min(135rem, calc(100% - 4rem));
+    padding: 7rem max(4rem, calc((100% - 124rem) / 2));
 }
 .cases .section-head, .stack .section-head, .industries .section-head { margin-left: auto; margin-right: auto; text-align: center; }
 .cases .section-head .page-label, .stack .section-head .page-label, .industries .section-head .page-label { margin-left: auto; margin-right: auto; }
@@ -933,10 +930,8 @@ section.industries, section.stack, section.leader { padding-top: 0; padding-bott
     .hero-title { max-width: 50rem; font-size: 4rem; }
     .cases-grid { grid-template-columns: 1fr; }
     .solutions .container, .process .container, .stack .container {
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
+        width: calc(100% - 4rem);
+        padding: 5rem 2rem;
     }
     .final .container, .footer .container { width: calc(100% - 2rem); }
     .audit-box { padding: 4rem 2.4rem; border-radius: 2rem; }
